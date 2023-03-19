@@ -1,0 +1,80 @@
+ [
+  {
+    "id": 1,
+    "name": "Pao de Mel chocolate",
+    "price": 20.0,
+    "score": 100,
+    "image": "pao_mel.jpeg"
+  },
+  {
+    "id": 2,
+    "name": "Pao de Mel Coracao",
+    "price": 20.0,
+    "score": 80,
+    "image": "pao_mel_coracao.jpeg"
+  },
+  {
+    "id": 3,
+    "name": "Trufas sortidas - 10un",
+    "price": 50.0,
+    "score": 250,
+    "image": "trufa_4.jpeg"
+  },
+  {
+    "id": 4,
+    "name": "Bolo Chocolate",
+    "price": 249.99,
+    "score": 205,
+    "image": "bolo_chocolate.jpeg"
+  },
+  {
+    "id": 5,
+    "name": "Bolo de Creme",
+    "price": 69.99,
+    "score": 150,
+    "image": "bolo_creme.jpeg"
+  },
+  {
+    "id": 6,
+    "name": "Bolo Enfeitado",
+    "price": 71.94,
+    "score": 400,
+    "image": "bolo_enfeitado.jpeg"
+  },
+  {
+    "id": 7,
+    "name": "Bolo Pequeno",
+    "price": 79.99,
+    "score": 50,
+    "image": "bolo_pequeno.jpeg"
+  },
+  {
+    "id": 8,
+    "name": "Pao de Mel",
+    "price": 195.39,
+    "score": 325,
+    "image": "pao_de_mel.jpeg"
+  },
+  {
+    "id": 9,
+    "name": "Trufa Ursinho",
+    "price": 115.8,
+    "score": 290,
+    "image": "trufa.jpeg"
+  },
+  {
+    "id": 9,
+    "name": "Trufa Brigadeiro",
+    "price": 115.8,
+    "score": 290,
+    "image": "trufa_3.jpeg"
+  },
+  {
+    "id": 9,
+    "name": "Trufa Sabores",
+    "price": 115.8,
+    "score": 290,
+    "image": "trufa_2.jpeg"
+  }
+]
+ 

@@ -1,0 +1,155 @@
+version: '3'
+
+services:
+
+  api-docesdalu:
+    container_name: api-docesdalu
+    build:
+        context: ../docesdalu
+        dockerfile: dockerfile
+    ports:
+        - '8080:8080'
+    depends_on:
+        - rabbitmq
+        - sftp
+        - postgres-lu
+        - elasticsearch-doces-da-lu
+        - redis
+    environment:
+      RABBIT_HOST: "172.18.0.7"
+      RABBIT_PORT: 5672
+      RABBIT_USER: admin
+      RABBIT_PASS: 123456
+      ELASTICSEARCH_HOST: 172.18.0.3:9200
+      POSTGRES_USER: docesdalu
+      POSTGRES_PASSWORD: docesdalu
+      POSTGRES_DB: docesdalu
+      POSTGRES_HOST: postgres
+  
+  api-servico-encomenda:
+    container_name: api-servico-encomenda
+    build:
+      context: ../servico-encomenda
+      dockerfile: dockerfile
+    ports:
+      - '8081:8081'
+    depends_on:
+      - rabbitmq
+      - sftp
+      - postgres-lu
+      - elasticsearch-doces-da-lu
+      - redis
+    environment:
+      RABBIT_HOST: rabbitmq
+      RABBIT_PORT: 5672
+      RABBIT_USER: admin
+      RABBIT_PASS: 123456
+      ELASTICSEARCH_HOST: elasticsearch-doces-da-lu
+  
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq-volume:/var/lib/rabbitmq/
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=123456
+  
+  sftp:
+    container_name: sftp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '58898:22'
+
+  postgres-lu:
+    image: 'postgres:alpine'
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: docesdalu
+      POSTGRES_PASSWORD: docesdalu
+      POSTGRES_DB: docesdalu
+      POSTGRES_HOST: postgres
+
+  elasticsearch-doces-da-lu:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.1
+    container_name: elasticsearch-doces-da-lu
+    environment:
+      - node.name=ws-es-node
+      - discovery.type=single-node
+      - cluster.name=ws-es-data-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+      # - xpack.security.enabled='false'
+      # - xpack.monitoring.enabled='false'
+      # - xpack.watcher.enabled='false'
+      # - xpack.ml.enabled='false'
+      # - http.cors.enabled='true'
+      # - http.cors.allow-origin="*"
+      # - http.cors.allow-methods=OPTIONS, HEAD, GET, POST, PUT, DELETE
+      # - http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type, Content-Length
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - vibhuviesdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    
+  kibana-doces-da-lu:
+    image: docker.elastic.co/kibana/kibana:7.3.1
+    container_name: kibana-doces-da-lu
+    environment:
+      SERVER_NAME: 127.0.0.1
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+      # XPACK_GRAPH_ENABLED: false
+      # XPACK_ML_ENABLED: false
+      # XPACK_REPORTING_ENABLED: false
+      # XPACK_SECURITY_ENABLED: false
+      # XPACK_WATCHER_ENABLED: false
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    restart: "unless-stopped"
+
+  redis:
+    image: 'bitnami/redis:latest'
+    ports:
+      - 6379:6379
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+
+  localstack:
+    image: localstack/localstack:latest
+    environment: 
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=fakeAccessKeyId
+      - AWS_SECRET_ACCESS_KEY=fakeSecretAccessKey
+      - EDGE_PORT=4566
+      - SERVICES=lambda,s3,ec2,ecs
+    ports: 
+      - '4566-4583:4566-4583'
+    volumes: 
+      - tmp-dir:/tmp/localstack
+      - localstackV:/var/run/docker.sock
+
+volumes:
+  grafana-volume:
+  prometheus-volume:
+  vibhuviesdata:
+  postgres-volume:
+  rabbitmq-volume:
+  tmp-dir:
+  localstackV:
+    driver: local
