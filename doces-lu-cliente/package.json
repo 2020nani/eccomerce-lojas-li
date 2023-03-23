@@ -1,5 +1,8 @@
 {
   "name": "doces-lu-cliente",
+  "author": {
+    "name": "Hernani"
+  },
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
