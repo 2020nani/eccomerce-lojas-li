@@ -42,13 +42,9 @@
 
 <ng-template #loadingError>
   <div *ngIf="!encomendas$; else loading">
-    <div class="modal-body text-center">
-      <app-erro></app-erro>
-    </div>
+    <div class="modal-body text-center">erro</div>
   </div>
-  <ng-template #loading>
-    <app-modal-loading></app-modal-loading>
-  </ng-template>
+  <ng-template #loading> erro </ng-template>
 </ng-template>
 
 <ng-template #deleteModal>
