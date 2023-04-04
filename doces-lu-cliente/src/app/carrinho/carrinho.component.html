@@ -1,0 +1,60 @@
+<div class="container" *ngIf="encomendas$ as encomendas; else loadingError">
+  <table class="table-content">
+    <thead>
+      <tr>
+        <th></th>
+        <th>encomenda</th>
+        <th>QTD</th>
+        <th>SUBTOTAL</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let encomenda of encomendas">
+      <tr>
+        <td>
+          <img src="" alt="" />
+        </td>
+        <td>
+          <strong>{{ encomenda.nome }}</strong>
+          <span>{{ encomenda.preco | currency : "BRL" : true }}</span>
+        </td>
+        <td>
+          <div>
+            <button type="button" (click)="adicionarCarrinho(encomenda)">
+              teste
+            </button>
+            <input type="number" readOnly value="{{ encomenda.quantidade }}" />
+            <button type="button" (click)="retirarCarrinho(encomenda)">
+              remover
+            </button>
+          </div>
+        </td>
+        <td>
+          <strong>0</strong>
+        </td>
+        <td>
+          <button type="button">teste</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #loadingError>
+  <div *ngIf="!encomendas$; else loading">
+    <div class="modal-body text-center">
+      <app-erro></app-erro>
+    </div>
+  </div>
+  <ng-template #loading>
+    <app-modal-loading></app-modal-loading>
+  </ng-template>
+</ng-template>
+
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Tem certeza que deseja remover esse encomenda?</p>
+    <button type="button" class="btn btn-default">Sim</button>
+    <button type="button" class="btn btn-primary">Nao</button>
+  </div>
+</ng-template>

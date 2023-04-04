@@ -1,0 +1,74 @@
+.container {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.table-content {
+  width: 95vw;
+}
+
+thead th {
+  color: #999;
+  text-align: left;
+  padding: 12px;
+}
+
+tbody td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.table-content strong {
+  color: #333;
+  display: block;
+}
+.table-content span {
+  display: block;
+  margin-top: 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.table-content div {
+  display: flex;
+  align-items: center;
+}
+.table-content div input {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #666;
+  padding: 6px;
+  width: 50px;
+}
+
+.table-content button {
+  background: none;
+  border: 0;
+  padding: 6px;
+}
+
+@media screen and (max-width: 570px) {
+  tbody td {
+    padding: 2px;
+  }
+
+  .table-content span {
+    font-size: 10px;
+  }
+
+  .table-content strong {
+    font-size: 14px;
+  }
+
+  .table-content div input {
+    width: 20px;
+  }
+
+  .table-content button {
+    padding: 0;
+  }
+}

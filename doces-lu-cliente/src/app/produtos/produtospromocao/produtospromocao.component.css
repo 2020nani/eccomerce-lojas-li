@@ -1,0 +1,13 @@
+.content-promotion {
+  width: 18vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 500px) {
+  .content-promotion {
+    width: 100vw;
+    flex-direction: row;
+  }
+}

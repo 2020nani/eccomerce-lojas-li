@@ -1,0 +1,33 @@
+<div class="container" *ngIf="produtos$ | async as produtos; else loadingError">
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    "
+  >
+    <app-produtospromocao></app-produtospromocao>
+  </div>
+  <div class="content">
+    <app-produtoslist [produtos]="produtos"></app-produtoslist>
+  </div>
+</div>
+<ng-template #loadingError>
+  <div *ngIf="error$ | async; else loading">
+    <div class="modal-body text-center">
+      <app-erro></app-erro>
+    </div>
+  </div>
+  <ng-template #loading>
+    <app-modal-loading></app-modal-loading>
+  </ng-template>
+</ng-template>
+
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Tem certeza que deseja remover esse produto?</p>
+    <button type="button" class="btn btn-default">Sim</button>
+    <button type="button" class="btn btn-primary">Nao</button>
+  </div>
+</ng-template>
