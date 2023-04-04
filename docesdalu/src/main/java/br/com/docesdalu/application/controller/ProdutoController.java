@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,11 +57,11 @@ public class ProdutoController {
             @ApiResponse(code = 404, message = "Nao foi encontrado algum dado necessario"),
     })
     @GetMapping("produtos")
-    public Page<ProdutoOutput> listaProdutos(
+    public ResponseEntity<Page<ProdutoOutput>> listaProdutos(
             @RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size,
             @PageableDefault(sort = "nome", direction = Sort.Direction.DESC, page = 0, size = 100) Pageable paginacao){
-        return produtoService.buscarProdutos(paginacao)
-                .map(ProdutoOutput::new);
+        return ResponseEntity.ok(produtoService.buscarProdutos(paginacao)
+                .map(ProdutoOutput::new));
     }
 
     @ApiOperation(value = "Retorna produto cadastrado conforme o id")

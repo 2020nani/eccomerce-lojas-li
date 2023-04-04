@@ -1,5 +1,3 @@
-import { DashboardModule } from './dashboard/dashboard.module';
-import { ProdutosService } from './services/produtos.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -8,14 +6,21 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './login/auth.service';
-import { HomeComponent } from './home/home.component';
-import { AuthGuard } from './guards/auth.guard';
-import { MonitorInterceptor } from './monitor.interceptor';
+import { HeaderComponent } from './header/header.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { MonitorInterceptor } from './shared/providers/monitor.interceptor';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  declarations: [AppComponent, LoginComponent, HeaderComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    TooltipModule.forRoot(),
+  ],
   providers: [
     AuthService,
     AuthGuard,

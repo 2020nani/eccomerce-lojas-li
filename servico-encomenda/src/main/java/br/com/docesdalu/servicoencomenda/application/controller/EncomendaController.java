@@ -26,6 +26,11 @@ public class EncomendaController {
     private EncomendaService encomendaService;
     private ExcelBuilder excelBuilder;
 
+    @GetMapping("teste")
+    @ResponseStatus(HttpStatus.ALREADY_REPORTED)
+    public void teste(){
+        System.out.println("chamou");
+    }
     @PostMapping(path = "cpf/blacklist",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
     public ResponseEntity<?> cadastraCpfBlackList(MultipartFile file) throws IOException, NoSuchAlgorithmException, InvalidFormatException {

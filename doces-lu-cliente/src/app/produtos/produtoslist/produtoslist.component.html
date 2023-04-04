@@ -1,0 +1,30 @@
+<div class="container">
+  <ul class="content-ul">
+    <li
+      class="content-li"
+      *ngFor="
+        let produto of produtos$
+          | slice : (page - 1) * pageSize : (page - 1) * pageSize + pageSize
+      "
+    >
+      <img
+        src="https://th.bing.com/th?id=OIP.uW4diYUncZvsq0DJJC1DvQHaFj&w=288&h=216&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2"
+        class="card-img-top"
+        alt="https://th.bing.com/th?id=OIP.uW4diYUncZvsq0DJJC1DvQHaFj&w=288&h=216&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2"
+      />
+      <strong class="card-title">{{ produto.nome }}</strong>
+      <p class="card-text">Categoria: {{ produto.categoria }}</p>
+      <p>Preco: {{ produto.preco | currency : "BRL" : true }}</p>
+      <p>Estoque: {{ produto.quantidade }}</p>
+      <button (click)="adicionarCarrinho(produto)">
+        Adicionar ao carrinho
+      </button>
+    </li>
+  </ul>
+  <pagination
+    [(ngModel)]="page"
+    [totalItems]="produtos$.length"
+    [itemsPerPage]="pageSize"
+    [maxSize]="maxSize"
+  ></pagination>
+</div>
