@@ -1,7 +1,5 @@
 import { Component, SimpleChange } from '@angular/core';
 import { AuthService } from './login/auth.service';
-import { Router } from '@angular/router';
-import { setTheme } from 'ngx-bootstrap/utils';
 import { ProdutosService } from './shared/services/produtos.service';
 import { Produtos } from './shared/models/produtos';
 
@@ -17,7 +15,6 @@ export class AppComponent {
   encomendas: Produtos[] = [];
 
   constructor(
-    private router: Router,
     private authService: AuthService,
     private produtoService: ProdutosService
   ) {}
