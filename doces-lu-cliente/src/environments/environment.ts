@@ -5,6 +5,16 @@
 export const environment = {
   production: false,
   baseUrl: 'http://localhost:8080/v1',
+  remoteEntry: {
+    'checkout-doces-da-lu': {
+      remoteEntry: 'http://localhost:4201/remoteEntry.js',
+
+      exposedModule: './Module',
+      displayName: 'Checkout-Encomenda',
+      routePath: 'checkout',
+      ngModuleName: 'CheckoutModule',
+    },
+  },
 };
 
 /*
