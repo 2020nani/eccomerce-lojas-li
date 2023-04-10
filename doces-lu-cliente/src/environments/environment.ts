@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   baseUrl: 'http://localhost:8080/v1',
-  remoteEntry: {
+  remoteEntry: 'http://localhost:4201/remoteEntry.js',
+  json: {
     'checkout-doces-da-lu': {
       remoteEntry: 'http://localhost:4201/remoteEntry.js',
 
@@ -16,7 +17,6 @@ export const environment = {
     },
   },
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

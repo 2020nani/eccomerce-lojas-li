@@ -29,8 +29,8 @@ const APP_ROUTES: Routes = [
     path: 'checkout',
     loadChildren: () =>
       loadRemoteModule({
-        type: 'manifest',
-        remoteName: 'checkout-doces-da-lu',
+        type: 'module',
+        remoteEntry: 'http://localhost:4201/remoteEntry.js',
         exposedModule: './Module',
       }).then((m) => m.CheckoutModule),
   },
