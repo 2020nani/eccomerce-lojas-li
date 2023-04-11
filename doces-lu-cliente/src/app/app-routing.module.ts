@@ -1,3 +1,4 @@
+import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -27,12 +28,12 @@ const APP_ROUTES: Routes = [
   { path: '', redirectTo: '/produtos', pathMatch: 'full' },
   {
     path: 'checkout',
-    loadChildren: () =>
+    loadComponent: () =>
       loadRemoteModule({
         type: 'module',
         remoteEntry: 'http://localhost:4201/remoteEntry.js',
-        exposedModule: './Module',
-      }).then((m) => m.CheckoutModule),
+        exposedModule: './Component',
+      }).then((m) => m.CheckoutComponent),
   },
 ];
 
