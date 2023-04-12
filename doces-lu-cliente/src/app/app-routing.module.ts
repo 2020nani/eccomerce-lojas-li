@@ -1,5 +1,5 @@
 import { AppComponent } from './app.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './shared/guards/auth.guard';
@@ -26,7 +26,7 @@ const APP_ROUTES: Routes = [
   //{ path: 'curso/:id', component: CursoDetalheComponent },*/
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/produtos', pathMatch: 'full' },
-  {
+  /*{
     path: 'checkout',
     loadComponent: () =>
       loadRemoteModule({
@@ -34,7 +34,25 @@ const APP_ROUTES: Routes = [
         remoteEntry: 'http://localhost:4201/remoteEntry.js',
         exposedModule: './Component',
       }).then((m) => m.CheckoutComponent),
+  },*/
+  {
+    path: 'booking',
+    loadChildren: () =>
+      loadRemoteModule({
+        type: 'module',
+        remoteEntry: 'http://localhost:4201/remoteEntry.js',
+        exposedModule: './routes',
+      }).then((m) => m.MFE1_ROUTES),
   },
+  /*{
+    path: 'checkout',
+    loadChildren: () =>
+      loadRemoteModule({
+        type: 'module',
+        remoteEntry: 'http://localhost:4201/remoteEntry.js',
+        exposedModule: './Module',
+      }).then((m) => m.CheckoutModule),
+  },*/
 ];
 
 @NgModule({
