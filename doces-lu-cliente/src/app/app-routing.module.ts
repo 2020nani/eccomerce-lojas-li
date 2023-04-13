@@ -26,15 +26,15 @@ const APP_ROUTES: Routes = [
   //{ path: 'curso/:id', component: CursoDetalheComponent },*/
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/produtos', pathMatch: 'full' },
-  /*{
-    path: 'checkout',
-    loadComponent: () =>
+  {
+    path: 'checkout-routing',
+    loadChildren: () =>
       loadRemoteModule({
         type: 'module',
         remoteEntry: 'http://localhost:4201/remoteEntry.js',
-        exposedModule: './Component',
-      }).then((m) => m.CheckoutComponent),
-  },*/
+        exposedModule: './Module',
+      }).then((m) => m.AppRoutingModule),
+  },
   {
     path: 'booking',
     loadChildren: () =>
@@ -44,15 +44,15 @@ const APP_ROUTES: Routes = [
         exposedModule: './routes',
       }).then((m) => m.MFE1_ROUTES),
   },
-  /*{
+  {
     path: 'checkout',
     loadChildren: () =>
       loadRemoteModule({
         type: 'module',
         remoteEntry: 'http://localhost:4201/remoteEntry.js',
         exposedModule: './Module',
-      }).then((m) => m.CheckoutModule),
-  },*/
+      }).then((m) => m.AppModule),
+  },
 ];
 
 @NgModule({
