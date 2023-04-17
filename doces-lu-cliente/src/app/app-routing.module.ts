@@ -27,24 +27,6 @@ const APP_ROUTES: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/produtos', pathMatch: 'full' },
   {
-    path: 'checkout-routing',
-    loadChildren: () =>
-      loadRemoteModule({
-        type: 'module',
-        remoteEntry: 'http://localhost:4201/remoteEntry.js',
-        exposedModule: './Module',
-      }).then((m) => m.AppRoutingModule),
-  },
-  {
-    path: 'booking',
-    loadChildren: () =>
-      loadRemoteModule({
-        type: 'module',
-        remoteEntry: 'http://localhost:4201/remoteEntry.js',
-        exposedModule: './routes',
-      }).then((m) => m.MFE1_ROUTES),
-  },
-  {
     path: 'checkout',
     loadChildren: () =>
       loadRemoteModule({
