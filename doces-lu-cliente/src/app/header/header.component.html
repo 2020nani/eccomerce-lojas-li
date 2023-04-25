@@ -2,9 +2,13 @@
   <a href="#" class="brand-logo">Logo</a>
   <ul id="nav-mobile" class="right hide-on-med-and-down">
     <li routerLinkActive="active"><a routerLink="/produtos">Produtos</a></li>
-    <li routerLinkActive="active"><a routerLink="/carrinho">Components</a></li>
+    <li routerLinkActive="active">
+      <a routerLink="/carrinho">
+        <mat-icon>shopping_cart</mat-icon>{{ quantidadeEncomendas }}</a
+      >
+    </li>
     <li>
-      <a role="button" (click)="logout()">Logout {{ quantidadeEncomendas }}</a>
+      <a role="button" (click)="logout()">Logout</a>
     </li>
   </ul>
 </div>

@@ -11,14 +11,18 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MonitorInterceptor } from './shared/providers/monitor.interceptor';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatIconModule,
     FormsModule,
     HttpClientModule,
+    CommonModule,
     TooltipModule.forRoot(),
   ],
   providers: [

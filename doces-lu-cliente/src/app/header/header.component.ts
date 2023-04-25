@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { Component, Input, OnInit, SimpleChange } from '@angular/core';
 import { AuthService } from '../login/auth.service';
 import { ProdutosService } from '../shared/services/produtos.service';

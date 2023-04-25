@@ -16,15 +16,14 @@ export class ProdutoslistComponent {
 
   constructor(private produtoService: ProdutosService) {}
 
-  ngOnInit() {
-    console.log(this.produtos$);
-  }
+  ngOnInit() {}
 
   updatePage(page: number) {
     this.page = page;
   }
 
   adicionarCarrinho(produto: Produtos) {
+    console.log(localStorage.getItem('encomenda'));
     this.produtoService.addEncomenda(produto);
   }
 }

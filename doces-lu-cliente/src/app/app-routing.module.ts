@@ -16,8 +16,22 @@ const APP_ROUTES: Routes = [
   },
   {
     path: 'carrinho',
-    loadChildren: () =>
-      import('./carrinho/carrinho.module').then((m) => m.CarrinhoModule),
+    loadChildren: () => {
+      const baseUrl = 'http://localhost:4201';
+      return loadAdminStyles().then(() =>
+        loadRemoteModule({
+          type: 'module',
+          remoteEntry: `${baseUrl}/remoteEntry.js`,
+          exposedModule: './Module',
+        }).then((m) => m.AppModule)
+      );
+    },
+    /*loadChildren: () =>
+      loadRemoteModule({
+        type: 'module',
+        remoteEntry: 'http://localhost:4201/remoteEntry.js',
+        exposedModule: './Module',
+      }).then((m) => m.AppModule),*/
     canActivate: [AuthGuard],
     //canActivateChild: [AlunosGuard],
     canLoad: [AuthGuard],
@@ -26,16 +40,26 @@ const APP_ROUTES: Routes = [
   //{ path: 'curso/:id', component: CursoDetalheComponent },*/
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/produtos', pathMatch: 'full' },
-  {
-    path: 'checkout',
-    loadChildren: () =>
-      loadRemoteModule({
-        type: 'module',
-        remoteEntry: 'http://localhost:4201/remoteEntry.js',
-        exposedModule: './Module',
-      }).then((m) => m.AppModule),
-  },
 ];
+
+export function loadAdminStyles(): Promise<void> {
+  return new Promise((resolve) => {
+    const baseUrl = 'http://localhost:4201';
+    const el = document.getElementById('mfe-module-styles');
+
+    // Load one instance, do it like this to handle errors and retrying
+    if (el) {
+      el.remove();
+    }
+    const headEl = document.getElementsByTagName('head')[0];
+    const styleLinkEl = document.createElement('link');
+    styleLinkEl.rel = 'stylesheet';
+    styleLinkEl.id = 'mfe-module-styles';
+    styleLinkEl.href = `${baseUrl}/mfe_module_styles.css`;
+    headEl.appendChild(styleLinkEl);
+    resolve();
+  });
+}
 
 @NgModule({
   imports: [RouterModule.forRoot(APP_ROUTES)],
